@@ -45,8 +45,150 @@
     <script src="./editable/wedding-data.js"></script>
     <script type="module" crossorigin src="./assets/index-DF9DML25.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/styles-DX-39EG5.css">
+
+    <style>
+      /* Floating BGM Button */
+      #bgmAudioBtn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(255, 252, 245, 0.94);
+        border: 1.5px solid rgba(185, 139, 63, 0.55);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.14), 0 0 12px rgba(185, 139, 63, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 60;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+      #bgmAudioBtn:hover {
+        transform: scale(1.08);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18), 0 0 16px rgba(185, 139, 63, 0.4);
+      }
+      #bgmAudioBtn:active {
+        transform: scale(0.94);
+      }
+      #bgmAudioBtn svg {
+        width: 22px;
+        height: 22px;
+        fill: #b98b3f;
+      }
+      .bgm-spin {
+        animation: bgmDiskSpin 6s linear infinite;
+      }
+      @keyframes bgmDiskSpin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Background Music Audio -->
+    <audio id="weddingBgAudio" loop preload="auto" playsinline>
+      <source src="./assets/bgm.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Audio Toggle Button -->
+    <button id="bgmAudioBtn" type="button" aria-label="Toggle background music" title="Toggle background music">
+      <svg id="bgmIconPlay" class="bgm-spin" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+      </svg>
+      <svg id="bgmIconMuted" style="display:none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73l4.73 4.73c-.45.34-.98.59-1.57.73l.63 1.9c.89-.22 1.7-.62 2.39-1.15L19.73 21 21 19.73 4.27 3zM14 7h4V3h-6v5.18l2 2V7z"/>
+      </svg>
+    </button>
+
+    <script>
+      (function() {
+        var audio = document.getElementById('weddingBgAudio');
+        var btn = document.getElementById('bgmAudioBtn');
+        var iconPlay = document.getElementById('bgmIconPlay');
+        var iconMuted = document.getElementById('bgmIconMuted');
+
+        if (window.WEDDING_DATA && window.WEDDING_DATA.bgm && window.WEDDING_DATA.bgm.src) {
+          audio.src = window.WEDDING_DATA.bgm.src;
+        }
+
+        function updateUI(isPlaying) {
+          if (isPlaying) {
+            iconPlay.style.display = 'block';
+            iconMuted.style.display = 'none';
+            btn.classList.add('bgm-spin');
+          } else {
+            iconPlay.style.display = 'none';
+            iconMuted.style.display = 'block';
+            btn.classList.remove('bgm-spin');
+          }
+        }
+
+        function playMusic() {
+          if (!audio) return;
+          audio.muted = false;
+          var promise = audio.play();
+          if (promise !== undefined) {
+            promise.then(function() {
+              updateUI(true);
+            }).catch(function() {
+              updateUI(false);
+            });
+          }
+        }
+
+        function pauseMusic() {
+          if (!audio) return;
+          audio.pause();
+          updateUI(false);
+        }
+
+        function toggleMusic(e) {
+          if (e) e.stopPropagation();
+          if (audio.paused) {
+            playMusic();
+          } else {
+            pauseMusic();
+          }
+        }
+
+        btn.addEventListener('click', toggleMusic);
+
+        // When the intro gate opens or video ends, seamlessly start background music
+        function setupIntroBGM() {
+          var checkTimer = setInterval(function() {
+            var video = document.querySelector('video');
+            if (video) {
+              video.addEventListener('ended', function() {
+                setTimeout(playMusic, 400);
+              });
+            }
+            var hasIntro = document.querySelector('button[aria-label*="play wedding invitation"]') || document.querySelector('video');
+            if (!hasIntro) {
+              clearInterval(checkTimer);
+              playMusic();
+            }
+          }, 350);
+        }
+
+        function onInteraction() {
+          var hasIntro = document.querySelector('button[aria-label*="play wedding invitation"]');
+          if (!hasIntro && audio.paused) {
+            playMusic();
+          }
+        }
+
+        window.addEventListener('click', onInteraction, { passive: true });
+        window.addEventListener('touchstart', onInteraction, { passive: true });
+
+        setupIntroBGM();
+      })();
+    </script>
   </body>
 </html>

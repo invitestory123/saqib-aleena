@@ -45,9 +45,14 @@ Edit `rsvp` and `wbcf` in `editable/wedding-data.js`:
 - `rsvp.note`: `"Taluqdar's Family with near & Dear"`
 - `wbcf.members`: `["Dr. Jawed Alam", "Dr. Shariq Pervez", "Ishrat Jawed, Rimsha Jawed"]`
 
+### Background Music (BGM)
+Edit `bgm` in `editable/wedding-data.js`:
+- `src`: Audio file path (`"./assets/bgm.mp3"`)
+- `url`: Source YouTube URL (`"https://youtube.com/shorts/KVPFa8Z7dic?si=8RLheq5MHoPvbBTX"`)
+
 ### Images & Gallery
 Replace files directly in `editable/assets/` or update paths in `editable/wedding-data.js`:
 - Hero art illustration: `editable/assets/hero.jpg`
 - Intro cover picture: `editable/assets/ChatGPT Image Aug 12, 2026 at 11_08_45 PM.png`
-- Intro video: `editable/assets/Continuous_wedding_invitation_an…_202608122343.mp4`
+- Intro video: `editable/assets/intro_with_bgm.mp4`
 - Gallery images (6 photos): `editable/assets/gallery-1.jpg` through `gallery-6.jpg`

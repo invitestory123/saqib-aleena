@@ -76,10 +76,16 @@ window.WEDDING_DATA = {
 
   closing: "Your duas and gracious presence are the blessing we wish for. Come, share this joy with us, and help us begin forever, insha'Allah.",
 
+  bgm: {
+    src: "./assets/bgm.mp3",
+    title: "Wedding BGM",
+    url: "https://youtube.com/shorts/KVPFa8Z7dic?si=8RLheq5MHoPvbBTX",
+  },
+
   images: {
     heroArt: "./editable/assets/hero.jpg",
     introCover: "./editable/assets/ChatGPT Image Aug 12, 2026 at 11_08_45 PM.png",
-    introVideo: "./editable/assets/Continuous_wedding_invitation_an…_202608122343.mp4",
+    introVideo: "./editable/assets/intro_with_bgm.mp4",
   },
 
   gallery: [
