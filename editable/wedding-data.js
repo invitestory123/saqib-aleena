@@ -18,7 +18,7 @@ window.WEDDING_DATA = {
     bride: {
       name: "Aleena",
       fullName: "Dr Aleena Khan",
-      line: "Daughter of Khan Mansur Abbas",
+      line: "Daughter of Khan Mansur Abbas and Nazneen Khan",
       blurb: "A heart full of grace, warmth and joy, stepping into this lifetime together.",
       photo: "./editable/assets/bride.jpg",
     },
@@ -27,7 +27,7 @@ window.WEDDING_DATA = {
   invitation: {
     host: "Mrs. Ateequn Nisa",
     relation: "W/o Late Alamgeer Khan",
-    intro: "cordially invites you to grace the auspicious occasion of the",
+    intro: "cordially invite you to grace the auspicious occasion of",
     event: "Dawat-e-Walima",
     subtitle: "of her beloved grandson",
     withText: "WITH",

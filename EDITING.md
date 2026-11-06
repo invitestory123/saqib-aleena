@@ -13,7 +13,7 @@ All routine customer edits are configured in:
 Edit `couple.groom` and `couple.bride` in `editable/wedding-data.js`:
 - `name`: Short display name (e.g. `"Saqib"`, `"Aleena"`)
 - `fullName`: Full legal / formal name (e.g. `"Dr Saqib Pervez"`, `"Dr Aleena Khan"`)
-- `line`: Family lineage / parent names (e.g. `"Son of Late Pervez Alam Khan"`, `"Daughter of Khan Mansur Abbas"`)
+- `line`: Family lineage / parent names (e.g. `"Son of Late Pervez Alam Khan"`, `"Daughter of Khan Mansur Abbas and Nazneen Khan"`)
 - `blurb`: Short personal bio
 - `photo`: Path to profile photo (`./editable/assets/groom.jpg`, `./editable/assets/bride.jpg`)
 
@@ -21,7 +21,7 @@ Edit `couple.groom` and `couple.bride` in `editable/wedding-data.js`:
 Edit `invitation` in `editable/wedding-data.js`:
 - `host`: Host name (`"Mrs. Ateequn Nisa"`)
 - `relation`: Relationship (`"W/o Late Alamgeer Khan"`)
-- `intro`: Invitation text (`"cordially invites you to grace the auspicious occasion of the"`)
+- `intro`: Invitation text (`"cordially invite you to grace the auspicious occasion of"`)
 - `event`: Occasion (`"Dawat-e-Walima"`)
 - `subtitle`: Subtitle (`"of her beloved grandson"`)
 
